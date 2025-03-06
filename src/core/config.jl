@@ -2,6 +2,15 @@ module Config
 
 export Configuration, load_config
 
+# Maximum number of products allowed in a single order
+const MAX_PRODUCTS_PER_ORDER = 50
+
+# Default discount percentage for promotions
+const DEFAULT_DISCOUNT_PERCENT = 10.0
+
+# API version for external services
+const API_VERSION = "v1.0"
+
 struct Configuration
     environment::String
     debug::Bool

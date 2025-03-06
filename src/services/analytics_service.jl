@@ -72,6 +72,11 @@ function perform_advanced_analysis()
     # Get all products
     products = DataService.query_data(:products, _ -> true)
     
+    # Convert Any[] to Vector{Product} if needed
+    if !isempty(products) && !(eltype(products) <: Types.Product)
+        products = convert(Vector{Types.Product}, products)
+    end
+    
     # Basic product analysis
     product_stats = analyze_data(products)
     

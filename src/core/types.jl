@@ -22,7 +22,7 @@ struct Order
     
     # Constructor with calculated total
     function Order(id::Int, user::User, products::Vector{Product})
-        total = sum(p.price for p in products)
+        total = isempty(products) ? 0.0 : sum(p.price for p in products)
         new(id, user, products, total)
     end
 end

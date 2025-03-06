@@ -15,6 +15,9 @@ end
 Calculate a discounted price
 """
 function calculate_discount(price::Float64, discount_percent::Float64)
+    if price < 0
+        throw(ArgumentError("Price must be non-negative"))
+    end
     if discount_percent < 0 || discount_percent > 100
         throw(ArgumentError("Discount percentage must be between 0 and 100"))
     end
