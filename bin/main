@@ -1,0 +1,45 @@
+#!/usr/bin/env julia
+
+# Use the project environment
+import Pkg
+Pkg.activate(joinpath(@__DIR__, ".."))
+
+# Import the package and modules
+using JuliaStructure
+using Dates
+
+module App
+
+# Import from the main package
+using JuliaStructure
+using Dates
+
+function run()
+    println("Starting application...")
+    
+    # Initialize with config
+    config = Config.load_config()
+    println("Loaded configuration: $(config.environment)")
+    
+    # Create data structures
+    user = Types.User("julia_user", "password123", "user@example.com")
+    println("Created user: $(user.username)")
+    
+    # Use utility functions
+    formatted_date = Helpers.format_datetime(now())
+    println("Current date: $formatted_date")
+    
+    # Use services
+    data = DataService.fetch_data(config.api_url)
+    println("Fetched $(length(data)) records")
+    
+    analysis = AnalyticsService.analyze_data(data)
+    println("Analysis results: $analysis")
+    
+    println("Application finished.")
+end
+
+end # module App
+
+# Run the application
+App.run()
